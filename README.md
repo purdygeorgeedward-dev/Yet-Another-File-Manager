@@ -40,3 +40,25 @@ Ditch the bloated, privacy-invading file managers and experience true freedom wi
 <img alt="App image" src="fastlane/metadata/android/en-US/images/phoneScreenshots/3_en-US.png" width="30%">
 <img alt="App image" src="fastlane/metadata/android/en-US/images/phoneScreenshots/4_en-US.png" width="30%">
 </div>
+---
+
+## Fork changes (Yet-Another-File-Manager)
+
+- **Bugfix pass: investigated, no changes made.** ViewPager tabs
+  (Files/Recents/Storage) use the same fresh-instance-per-scroll
+  `PagerAdapter` pattern found in other Yet-Another apps, but this app
+  registers no `EventBus` subscriptions, `BroadcastReceiver`s, or
+  `ContentObserver`s in any of its fragments - confirmed by checking each
+  one - so the leak found in Yet-Another-Voice-Recorder doesn't apply
+  here; there's no global singleton holding a reference to an orphaned
+  instance. File search (`ItemsFragment.searchQueryChanged()`) is properly
+  backgrounded via `ensureBackgroundThread` and already has a stale-result
+  guard (`lastSearchedText != text`) discarding out-of-order results from
+  a superseded search - the same good pattern found in Messages'
+  conversation search. Minor, not fixed: no debounce before starting a
+  search, so rapid typing can start multiple concurrent background
+  directory walks - a real but much smaller inefficiency than Contacts'
+  original issue, since this doesn't block the UI thread the way a
+  synchronous main-thread scan would. File deletion delegates to a shared
+  Commons helper (`handleFileDeleting`), not custom logic in this app,
+  so lower risk of an app-specific bug there.
