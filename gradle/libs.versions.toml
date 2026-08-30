@@ -8,7 +8,7 @@ detektCompose = "0.4.28"
 androidx-swiperefreshlayout = "1.2.0"
 androidx-documentfile = "1.1.0"
 #Fossify
-commons = "6.1.6"
+commons = "f3abb4475d"
 #Other
 autofittextview = "0.2.1"
 gestureviews = "2.9.0"
@@ -30,7 +30,7 @@ androidx-documentfile = { module = "androidx.documentfile:documentfile", version
 #Compose
 compose-detekt = { module = "io.nlopez.compose.rules:detekt", version.ref = "detektCompose" }
 #Fossify
-fossify-commons = { module = "org.fossify:commons", version.ref = "commons" }
+fossify-commons = { module = "com.github.purdygeorgeedward-dev:Yet-Another-Commons", version.ref = "commons" }
 #Other
 autofittextview = { module = "me.grantland:autofittextview", version.ref = "autofittextview" }
 gestureviews = { module = "com.alexvasilkov:gesture-views", version.ref = "gestureviews" }
