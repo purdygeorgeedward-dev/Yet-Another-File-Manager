@@ -93,13 +93,33 @@
             </org.fossify.filemanager.views.MySwipeRefreshLayout>
         </RelativeLayout>
 
-        <org.fossify.commons.views.MyFloatingActionButton
-            android:id="@+id/items_fab"
+        <FrameLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|end"
-            android:layout_margin="@dimen/activity_margin"
-            android:src="@drawable/ic_plus_vector" />
+            android:layout_margin="@dimen/activity_margin">
+
+            <org.fossify.commons.views.MyFloatingActionButton
+                android:id="@+id/items_fab"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_plus_vector" />
+
+            <!-- Purely decorative gloss highlight, not part of the FAB's own
+                 background/tint pipeline - see fab_gloss_highlight.xml for why. -->
+            <View
+                android:layout_width="20dp"
+                android:layout_height="14dp"
+                android:layout_gravity="top|start"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/fab_gloss_highlight"
+                android:clickable="false"
+                android:duplicateParentState="false"
+                android:focusable="false"
+                android:importantForAccessibility="no" />
+
+        </FrameLayout>
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </org.fossify.filemanager.fragments.ItemsFragment>

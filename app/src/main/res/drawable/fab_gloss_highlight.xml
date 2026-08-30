@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  A small radial-gradient "gloss" highlight meant to sit as a separate,
+  non-interactive overlay on top of a Material FloatingActionButton,
+  rather than replacing the FAB's own background. Material's FAB manages
+  its background/elevation/shadow/ripple tightly via backgroundTintList
+  (a flat color, no gradient support) - overriding that internal drawable
+  risks breaking its built-in behavior in ways that can't be verified
+  without a device. Verified via a PIL render simulation before use - a
+  flat-colored circle plus just this highlight convincingly reads as
+  glossy - without touching that pipeline at all. Same drawable as
+  Yet-Another-Clock's/Yet-Another-Calendar's fab_gloss_highlight.xml.
+-->
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="oval">
+    <gradient
+        android:type="radial"
+        android:gradientRadius="14dp"
+        android:startColor="#80FFFFFF"
+        android:endColor="#00FFFFFF" />
+</shape>

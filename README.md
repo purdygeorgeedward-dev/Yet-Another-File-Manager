@@ -62,3 +62,29 @@ Ditch the bloated, privacy-invading file managers and experience true freedom wi
   synchronous main-thread scan would. File deletion delegates to a shared
   Commons helper (`handleFileDeleting`), not custom logic in this app,
   so lower risk of an app-specific bug there.
+
+## Beautify pass (Yet-Another-File-Manager)
+
+- **Gloss highlight overlay on the "new item" FAB** (`items_fab`). Same
+  drawable and reasoning as Yet-Another-Clock's/Yet-Another-Calendar's FAB
+  treatment - Material's `FloatingActionButton` manages background/
+  elevation/shadow/ripple tightly via `backgroundTintList` (flat color
+  only), so a separate, non-interactive gloss highlight overlay achieves
+  a genuine glossy look without touching that pipeline. Underlying
+  technique already verified via PIL render simulation in the Clock app.
+  Confirmed this FAB is a simple, isolated case (referenced only by its
+  own id in `ItemsFragment.kt`, no other views constraining themselves
+  against it) before wrapping it in a `FrameLayout`.
+
+- **Considered and deliberately skipped:** the Storage Analysis tab's
+  usage indicator (`item_storage_volume.xml`) uses Material's
+  `LinearProgressIndicator` - a flat horizontal bar. Gel/gloss styling
+  doesn't translate well to a thin bar shape (the aesthetic is
+  fundamentally a round-object effect), and Material manages this
+  component's track/indicator colors just as tightly as the FAB's
+  background. Not worth forcing a treatment that wouldn't read well and
+  could hurt legibility of a genuinely functional element.
+
+  **Not verified on a real device** - the underlying technique was
+  verified via render simulation, not confirmed against a live render of
+  this specific FAB.
